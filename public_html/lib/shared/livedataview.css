@@ -1,0 +1,33 @@
+@charset "utf-8";
+/* CSS Document */
+
+.livedataview-loading-ct {
+    position: absolute;
+    z-index: 100;
+    width: 100%;
+    height: 100%;
+}
+.livedataview-loading-ct .mask {
+    background: #cdcdcd;
+    opacity: .5;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 20;
+}
+.livedataview-loading-ct .text {
+    border: 2px #787878 solid;
+    padding: 4px 12px;
+    color: #000;
+    background: #fff;
+    width: 70px;
+    z-index: 30;
+    margin: 0 auto 0;
+    position: relative;
+    cursor: wait;
+    top: 40%;
+}
+.livedataview-loading-ct .text div {
+    font-size: 14px;
+    font-weight: bold;
+}

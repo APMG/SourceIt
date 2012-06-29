@@ -1,0 +1,87 @@
+<div class="popupWrapper" id="popupWrapper-{{uuid}}" style="display:none;">
+	<div class="popupContainer">
+		<div class="closePopup">
+			<span id="closePopup-{{uuid}}" class="closeLink">[Close]</span>
+		</div>
+		<h3>&ldquo;{{selection}}&rdquo;</h3>
+		<ul id="sharingWrapper-{{uuid}}" class="sharingContainer">
+			<li class="sharingLabel">Sharing:</li>
+			<li class="twitterIcon"><a href="{{sharing.twitter}}" title="Share on Twitter" target="_blank"><img src='REPLACE_IFDB_URL/img/tweet.png' /></a></li>
+			<li><a href="{{sharing.facebook}}" title="Share on Facebook" target="_blank"><img src='REPLACE_IFDB_URL/img/facebook.png' /></a></li>
+		</ul>
+		<div id="accuracyWrapper-{{uuid}}" class="commentsWrapper">
+			<h3>About The Selection</h3>
+			<!-- ACCURACY FORM -->
+			<div class="formBody formBodyWithoutContainer">
+				<div class="row">
+					<label for="accuracy" class="label">Is it accurate?</label>
+					<span id='accuracySlider-{{uuid}}' class='sliderSpan'>50</span>
+					<input type="hidden" name="accuracy" value="50" />
+				</div>
+				<div class="row" >
+					<label for="sentiment" class="label">Do you agree?</label>
+					<span id='sentimentSlider-{{uuid}}' class='sliderSpan'>50</span>
+					<input type="hidden" name="accuracy" value="50" />
+				</div>
+				<div class="row last" id="sliderFormButtons-{{uuid}}">
+					<label>&nbsp;</label>
+					<input type="submit" name="submit" value="Submit" class="submitCommentButton" id="submitAccuracy-{{uuid}}" />
+					<input type="submit" name="submit" value="Add Comment" class="submitCommentButton" id="sliderAddComment-{{uuid}}" />
+					<div id="submitAccuracyCommentSpinner-{{uuid}}" style="display:none;" class="commentSpinner">
+						<img src="REPLACE_IFDB_URL/img/ajax-loader.gif" /></div>
+					</div>
+				</div>
+			</div>
+			<div id="sliderFormAnchor-{{uuid}}"></div>
+		</div>
+		<div id="commentsWrapper-{{uuid}}" class="commentsWrapper">
+			<h3>Comments</h3>
+			<!-- COMMENTS LIST -->
+			<ul id="commentsContainer-{{uuid}}" class="commentsContainer">
+				<li class="noComments" id='noComments-{{uuid}}'>No comments have been submitted yet.</li>
+			</ul>
+		</div>
+		<!-- COMMENT FORM ANCHORS -->
+		<div id="commentFormAnchor-{{uuid}}"></div>
+		<div class="formBody formBodyWithoutContainer">
+			<div class="row last" id="commentFormButtons-{{uuid}}">
+				<label>&nbsp;</label>
+				<input type="submit" name="submit" value="Add Comment" class="submitCommentButton" id="commentAddComment-{{uuid}}" />
+			</div>
+		</div>
+
+		<!-- COMMENT FORM -->
+		<div id="formWrapper-{{uuid}}" style="display:none;">
+			<h4>Add A Comment</h4>
+			<div id="formErrors-{{uuid}}" style="display:none;" class='formErrors'>
+				Oops. Something went wrong. Please check the issues listed below:
+				<ul class="formErrorsList" id="formErrorsList-{{uuid}}"></ul>
+			</div>
+			<form id="commentForm-{{uuid}}" class="formContainer">
+				<div id="commentTemplateForm-{{uuid}}" class='formBody'>
+					<input type="hidden" name="q" value="" />
+					<input type="hidden" name="comment_added" id='commentAdded-{{uuid}}' value="0" />
+					<input type="hidden" name="accuracy" id='accuracyValue-{{uuid}}' value="" />
+					<input type="hidden" name="sentiment" id='sentimentValue-{{uuid}}' value="" />
+					<input type="hidden" name="user_id" id='userId-{{uuid}}' value="{{user_id}}" />
+					<input type="hidden" name="full_name" id='fullName-{{uuid}}' value="{{full_name}}" />
+					<div class="row">
+						<label for="comment" class="label">Comment</label>
+						<textarea name="comment" rows='10'></textarea>
+					</div>
+					<div class="row">
+						<label for="private" class="label">Post as private?</label>
+						<input type="checkbox" name="private" value="1" class="normalCheckbox" />
+					</div>
+					<div class="row">
+						<label>&nbsp;</label>
+						<input type="submit" name="submit" value="Hide form" class="submitCommentButton" id="closeCommentForm-{{uuid}}" />
+						<input type="submit" name="submit" value="Post comment" class="submitCommentButton" id="submitComment-{{uuid}}" />
+						<div id="submitCommentSpinner-{{uuid}}" style="display:none;" class="commentSpinner"><img src="REPLACE_IFDB_URL/img/ajax-loader.gif" /></div>
+					</div>
+				</div>
+			</form>
+		</div>
+		<!-- END COMMENT FORM -->
+	</div>
+</div>
