@@ -20,28 +20,23 @@ define('DOCPATH', realpath(FCPATH.'../lib/doctrine/lib').'/');
 define('APPPATH', realpath(FCPATH).'/');
 define('IFDB_DOCROOT', realpath(FCPATH).'../public_html/');
 define('IFDB_ENVIRONMENT', 'dev'); // possible values are 'prod' and 'dev'
-define('AUTH_TKT_NAME', 'ifdb_auth_tkt');
-define('AUTH_TKT_CONFIG_FILE', realpath(FCPATH).'/../etc/auth_tkt.conf');
+define('PROFILES_INI_FILE', 'etc/profiles.ini');
+
+//define('AUTH_TKT_NAME', 'ifdb_auth_tkt');
+//define('AUTH_TKT_CONFIG_FILE', realpath(FCPATH).'/../etc/auth_tkt.conf');
 
 $profile_name = trim(file_get_contents(realpath(FCPATH."../etc/my_profile")));
 if (!$profile_name) {
     die("You must create a etc/my_profile file containing the name of a profile in etc/profiles.ini\n");
 }
-$json = file_get_contents(realpath(FCPATH."../etc/profiles.json"));
-$json = json_decode($json, true);
-$profile = $json[$profile_name];
-
-if (isset($profile["formbuilder_comment_url"])) {
-    define('FORMBUILDER_COMMENT_URL', $profile["formbuilder_comment_url"]);
+$profiles = parse_ini_file(realpath(FCPATH."../".PROFILES_INI_FILE), true);
+if (!$profiles) {
+    die("Invalid etc/profiles.ini");
 }
-if (isset($profile['inquiry_uuid'])) {
-    define('INQUIRY_UUID', $profile['inquiry_uuid']);
-}
-else {
-    throw new Exception("Must define inquiry uuid for comment in etc/profiles.json");
-}
-if (isset($profile['question_id'])) {
-    define('QUESTION_ID', $profile['question_id']);
+$profile = $profiles[$profile_name];
+if (!$profile) {
+    var_export($profiles);
+    die(sprintf("No such profile '%s' found in %s\n", $profile_name, PROFILES_INI_FILE));
 }
 if (isset($profile['fb_appId'])) {
     define('FB_APP_ID', $profile['fb_appId']);
@@ -53,20 +48,15 @@ if (isset($profile['base_url'])) {
     define('BASE_URL', $profile['base_url']);
 }
 else {
-    throw new Exception("Must define question id of the comment in etc/profiles.json");
+    die(sprintf("Must define base_url in %s\n", PROFILES_INI_FILE));
 }
-
-// Required AIR2 includes.
-define('AIR2_ENVIRONMENT', IFDB_ENVIRONMENT);
-require_once AIR2_PATH . "/app/config/air2_constants.php";
 
 /* set up include path */
 $my_include_paths = array(
     APPPATH.'libraries',
     APPPATH.'models',
     APPPATH.'../lib',
-    APPPATH.'../lib/shared',
-    AIR2_PATH.'/lib'
+    APPPATH.'../lib/shared'
 );
 set_include_path(implode(':', $my_include_paths));
 

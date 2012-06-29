@@ -10,7 +10,7 @@
  */
 require_once 'app/init.php';
 
-// manually load the DB connection - from MyPIN2
+// manually load the DB connection 
 $profiles = array(
     "main" => @file_get_contents(dirname(__FILE__) . "/my_profile"),
     "test" => @file_get_contents(dirname(__FILE__) . "/my_profile_test"),

@@ -25,9 +25,11 @@ define( "PUBLIC_HTML_CSS_TEMP", "public_html/css/temp" );
  * - scans through the two temporary directories looking for html and javascript files with variables to replace and update them
  */
 
-$profile_name = trim(file_get_contents("etc/my_profile"));
-$json = file_get_contents("etc/profiles.json");
-$json = json_decode($json, true);
+require 'app/init.php';
+
+if (!isset($profile)) {
+    die("No profile set via app/init.php");
+}
 
 $public_html_dir = scandir( PUBLIC_HTML_TEMP );
 $public_html_js_templates_dir = scandir( PUBLIC_HTML_JS_TEMPLATES_TEMP );
@@ -42,7 +44,7 @@ foreach ( $public_html_dir as $file_name ) {
         $buf = file_get_contents( PUBLIC_HTML_TEMP."/".$file_name );
         echo "Processing $file_name ";
         $n = 0;
-        foreach ( $json[$profile_name] as $key => $value ) {
+        foreach ( $profile as $key => $value ) {
             $key_str = 'REPLACE_' . strtoupper($key);
             $buf  = str_replace( $key_str, $value, $buf, $m );
             $n += $m;
@@ -60,7 +62,7 @@ foreach ( $public_html_js_dir as $file_name ) {
         $buf = file_get_contents( PUBLIC_HTML_JS_TEMP."/".$file_name );
         echo "Processing $file_name ";
         $n = 0;
-        foreach ( $json[$profile_name] as $key => $value ) {
+        foreach ( $profile as $key => $value ) {
             $key_str = 'REPLACE_' . strtoupper($key);
             $buf  = str_replace( $key_str, $value, $buf, $m );
             $n += $m;
@@ -78,7 +80,7 @@ foreach ( $public_html_js_templates_dir as $file_name ) {
         $buf = file_get_contents( PUBLIC_HTML_JS_TEMPLATES_TEMP."/".$file_name );
         echo "Processing $file_name ";
         $n = 0;
-        foreach ( $json[$profile_name] as $key => $value ) {
+        foreach ( $profile as $key => $value ) {
             $key_str = 'REPLACE_' . strtoupper($key);
             $buf  = str_replace( $key_str, $value, $buf, $m );
             $n += $m;
@@ -99,7 +101,7 @@ foreach ( $public_html_css_dir as $file_name ) {
         $buf = file_get_contents( PUBLIC_HTML_CSS_TEMP."/".$file_name );
         echo "Processing $file_name ";
         $n = 0;
-        foreach ( $json[$profile_name] as $key => $value ) {
+        foreach ( $profile as $key => $value ) {
             $key_str = 'REPLACE_' . strtoupper($key);
             $buf  = str_replace( $key_str, $value, $buf, $m );
             $n += $m;

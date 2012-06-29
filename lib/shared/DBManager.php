@@ -171,6 +171,7 @@ abstract class DBManager {
             self::load_registry_file($app_path);
         }
         if (!array_key_exists(self::$slave_profile, self::$registry)) {
+            var_export(self::$registry);
             die("No such profile_name defined: " . self::$slave_profile . "\n");
         }
         self::$slave = self::$registry[self::$slave_profile];
