@@ -7,15 +7,22 @@
 | reasons you are encouraged to change this when your site goes live.
 | For more info visit:  http://www.php.net/error_reporting
 */
-error_reporting(E_ALL);
+error_reporting( E_ALL );
+ini_set("display_errors", 1);
 
 /*
 |---------------------------------------------------------------
-| INIT AIR2 APPLICATION
+| INIT APPLICATION
 |---------------------------------------------------------------
 |
 */
 require_once realpath( dirname(__FILE__).'/../app/init.php' );
+
+// reset the error handling after we've checked our config
+if (IFDB_ENVIRONMENT == "prod") {
+    error_reporting(E_ERROR);
+    ini_set("display_errors", 0);
+}
 
 /*
 |---------------------------------------------------------------
