@@ -11,9 +11,9 @@ the Public Insight Network.
 Requirements
 ---------------
 
-PHP 5.2.x
-MySQL
-Javascript (client side)
+ * PHP 5.2.x
+ * MySQL
+ * Javascript (client side)
 
 License: GPL version 3 
 -----------------------
