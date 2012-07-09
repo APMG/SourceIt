@@ -1,7 +1,6 @@
 SourceIt
 ========
 
-/**************************************************************************
  *
  *   Copyright 2012 American Public Media Group
  *
@@ -20,5 +19,4 @@ SourceIt
  *   You should have received a copy of the GNU General Public License
  *   along with SourceIt.  If not, see <http://www.gnu.org/licenses/>.
  *
- *************************************************************************/
 
